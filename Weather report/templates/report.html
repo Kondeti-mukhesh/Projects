@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #c19ee0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+            background-color: #52b788;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        .weather {
+            margin-top: 20px;
+            padding: 20px;
+            border: 1px solid LightGray;
+            border-radius: 8px;
+            background-color: #848587;
+            color: black;
+            font-size: 18px;
+        }
+        .weather h2 {
+            color: black;
+            font-size: 28px;
+        }
+        .weather p {
+            margin: 10px 0;
+            font-size: 16px;
+        }
+        .error {
+            color: Crimson;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        button {
+            background-color: SteelBlue;
+            color: White;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s;
+        }
+        button:hover {
+            background-color: RoyalBlue;
+            transform: scale(1.05);
+        }
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 14px;
+            color: DarkSlateGray;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Weather Dashboard</h1>
+        <form method="POST">
+            <input type="text" name="city" placeholder="Enter city name" required>
+            <button type="submit"> Get Weather</button>
+        </form>
+
+        {% if weather %}
+        <div class="weather">
+            <h2>Weather in {{ weather.city }}, {{ weather.country }}</h2>
+            <p><b>Temperature:</b> {{ weather.temp }}°C</p>
+            <p><b>Feels like:</b> {{ weather.feels_like }}°C</p>
+            <p><b>Humidity:</b> {{ weather.humidity }}%</p>
+            <p><b>Condition:</b> {{ weather.condition }}</p>
+            <p><b>Wind Speed:</b> {{ weather.wind_speed }} m/s</p>
+        </div>
+        {% elif error %}
+        <p>{{ error }}</p>
+        {% endif %}
+    </div>
+</body>
+</html>
